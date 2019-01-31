@@ -12,7 +12,7 @@ const config = {
 const client = new line.Client(config);
 
 app.get('/', function (req, res) {
-	res.send('Hello I GEAR GEEK!!');
+	res.send('01-reply-bot!!');
 })
 
 app.post('/webhook', line.middleware(config), (req, res) => {
