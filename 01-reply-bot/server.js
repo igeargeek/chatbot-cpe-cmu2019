@@ -35,6 +35,48 @@ function handleMessageEvent(event) {
     type: event.message.type,
     text: event.message.text
   }
+
+  const eventMessageText = event.message.text.toLowerCase();
+  if(eventMessageText === "menu") {
+    msg = {
+      "type": "text", // ①git 
+      "text": "Select your menu",
+      "quickReply": { // ②
+        "items": [
+          {
+            "type": "action", // ③
+            "imageUrl": "https://www.igeargeek.com/wp-content/uploads/2018/09/cropped-38773896_936358296563359_1678814042111606784_n-1.png",
+            "action": {
+              "type": "message",
+              "label": "apply jobs!",
+              "text": "apply jobs"
+            }
+          },
+          {
+            "type": "action",
+            "action": {
+              "type": "message",
+              "label": "location",
+              "text": "location"
+            }
+          }
+        ]
+      }
+    }
+  }else if(eventMessageText === "location") {
+    msg = {
+      "type": "location",
+      "title": "I GEAR GEEK",
+      "address": "Malada space",
+      "latitude": 18.7777264,
+      "longitude": 98.9513933
+    }
+  }else if(eventMessageText === "apply jobs") {
+    msg = {
+      "type": "text",
+      "text": "jobs.igeargeek.com"
+    }
+  }
   return client.replyMessage(event.replyToken, msg);
 }
 
