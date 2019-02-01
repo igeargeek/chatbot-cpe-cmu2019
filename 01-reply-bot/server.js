@@ -1,7 +1,7 @@
-const express = require('express');
-const line = require('@line/bot-sdk');
+const express = require('express')
+const line = require('@line/bot-sdk')
 
-require('dotenv').config();
+require('dotenv').config()
 const app = express()
 
 const config = {
@@ -9,10 +9,10 @@ const config = {
   channelSecret: process.env.channelSecret
 };
 
-const client = new line.Client(config);
+const client = new line.Client(config)
 
 app.get('/', function (req, res) {
-	res.send('01-reply-bot!!');
+	res.send('01-reply-bot!!')
 })
 
 app.post('/webhook', line.middleware(config), (req, res) => {
@@ -22,16 +22,16 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 });
 
 function handleEvent(event) {
-  console.log(event);
+  console.log(event)
   if(event.type === 'message' && event.message.type === 'text') {
-    handleMessageEvent(event);
+    handleMessageEvent(event)
   }else {
     return Promise.resolve(null)
   }
 }
 
 function handleMessageEvent(event) {
-  var msg = {
+  let msg = {
     type: event.message.type,
     text: event.message.text
   }
@@ -77,7 +77,7 @@ function handleMessageEvent(event) {
       "text": "jobs.igeargeek.com"
     }
   }
-  return client.replyMessage(event.replyToken, msg);
+  return client.replyMessage(event.replyToken, msg)
 }
 
 app.set('port', (process.env.PORT || 4000))
