@@ -7,7 +7,7 @@ const app = express()
 const config = {
   channelAccessToken: process.env.channelAccessToken,
   channelSecret: process.env.channelSecret
-};
+}
 
 const client = new line.Client(config)
 
@@ -19,7 +19,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
   Promise
     .all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
-});
+})
 
 function handleEvent(event) {
   console.log(event)
@@ -36,7 +36,7 @@ function handleMessageEvent(event) {
     text: event.message.text
   }
 
-  const eventMessageText = event.message.text.toLowerCase();
+  const eventMessageText = event.message.text.toLowerCase()
   if(eventMessageText === "menu") {
     msg = {
       "type": "text", // ①git 
