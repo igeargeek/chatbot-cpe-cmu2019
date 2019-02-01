@@ -2,8 +2,6 @@ const express = require('express')
 const line = require('@line/bot-sdk')
 const restClient = new (require('node-rest-client').Client)
 
-const apiUrl = 'https://fathomless-reaches-36581.herokuapp.com/api'
-
 require('dotenv').config()
 const app = express()
 
@@ -35,7 +33,7 @@ function handleEvent(event) {
 
 function handleLocationEvent(event) {
   return new Promise((resolve, reject) => {
-    restClient.get(`${apiUrl}?lat=${event.message.latitude}&long=${event.message.longitude}`, (data, response) => {
+    restClient.get(`${process.env.apiUrl}?lat=${event.message.latitude}&long=${event.message.longitude}`, (data, response) => {
       if (data) {
         const pinData = data.map(row => ({
           "thumbnailImageUrl": row.aqi.icon,
